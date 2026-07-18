@@ -13,10 +13,10 @@ from network import router as network_router
 
 load_dotenv()
 
-XAI_API_KEY = os.getenv("XAI_API_KEY")
-if not XAI_API_KEY:
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
     raise RuntimeError(
-        "XAI_API_KEY is not set. Create a .env file with XAI_API_KEY=your_key_here"
+        "GEMINI_API_KEY is not set. Create a .env file with GEMINI_API_KEY=your_key_here"
     )
 
 DB_PATH = os.getenv("DB_PATH", "intelligence_core.db")
@@ -39,14 +39,11 @@ app.include_router(network_router)
 # Markdown link syntax ("[url](url)") pasted in by mistake, which is invalid
 # Python and was the main reason the backend never actually reached xAI.
 client = OpenAI(
-    api_key=XAI_API_KEY,
-    base_url="https://api.x.ai/v1",
+    api_key=GEMINI_API_KEY,
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 
-# xAI's current canonical chat model alias (as of mid-2026). Older aliases
-# like "grok-beta" / "grok-3" / "grok-4" are retired and silently redirect
-# here anyway, but pointing at it directly avoids surprises.
-GROK_MODEL = os.getenv("GROK_MODEL", "grok-4.3")
+GROK_MODEL = os.getenv("GROK_MODEL", "gemini-2.5-flash")
 
 # --- Very simple in-memory session store for context-aware follow-ups ---
 # In production replace this with Redis / a DB table keyed by session_id.
