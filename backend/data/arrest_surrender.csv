@@ -1,0 +1,2 @@
+ArrestSurrenderID,CaseMasterID,ArrestSurrenderTypeID,ArrestSurrenderDate,ArrestSurrenderStateId,ArrestSurrenderDistrictId,PoliceStationID,IOID,CourtID,AccusedMasterID,IsAccused,IsComplainantAccused
+9001,1001,1,2026-07-17,29,44,30006,5001,10,8001,1,0

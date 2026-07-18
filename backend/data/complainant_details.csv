@@ -1,0 +1,3 @@
+ComplainantID,CaseMasterID,ComplainantName,AgeYear,OccupationID,ReligionID,CasteID,GenderID
+4001,1001,Anand Hegde,42,2,1,1,1
+4002,1002,Sumithra Bai,38,3,1,3,2

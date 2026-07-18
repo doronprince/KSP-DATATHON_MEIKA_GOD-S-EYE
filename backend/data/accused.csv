@@ -1,0 +1,4 @@
+AccusedMasterID,CaseMasterID,AccusedName,AgeYear,GenderID,PersonID
+8001,1001,Ramesh Kumar,34,1,A1
+8002,1001,Kiran Shetty,29,1,A2
+8003,1002,Unknown Suspect,0,0,A1
