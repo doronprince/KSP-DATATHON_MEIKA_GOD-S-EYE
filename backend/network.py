@@ -63,9 +63,13 @@ async def network_analysis(
     edges: List[NetworkEdge] = []
     seen_edges: Set[Tuple[str, str, str]] = set()
 
-    def add_node(node_id: str, label: str, ntype: str, meta: Optional[dict] = None):
+    def add_node(node_id: str, label, ntype: str, meta: Optional[dict] = None):
         if node_id not in nodes and len(nodes) < MAX_NODES:
-            nodes[node_id] = NetworkNode(id=node_id, label=label, type=ntype, meta=meta or {})
+            # DB columns like CrimeNo can come back as int/float depending on
+            # how the data was loaded (e.g. via csv_to_db.py inferring types).
+            # Coerce to str here so it never breaks the response schema.
+            safe_label = str(label) if label is not None else node_id
+            nodes[node_id] = NetworkNode(id=node_id, label=safe_label, type=ntype, meta=meta or {})
 
     def add_edge(source: str, target: str, relation: str):
         if source not in nodes or target not in nodes:
