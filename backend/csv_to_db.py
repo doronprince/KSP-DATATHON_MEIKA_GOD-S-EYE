@@ -2,14 +2,10 @@ import sqlite3
 import pandas as pd
 import os
 
-
 def build_database_from_csvs():
     db_name = "intelligence_core.db"
-
-    # 1. Connect to SQLite (this creates the file if it doesn't exist)
     conn = sqlite3.connect(db_name)
 
-    # 2. Define the mapping of Table Names -> CSV File Paths
     csv_files = {
         "state": "data/state.csv",
         "district": "data/district.csv",
@@ -37,34 +33,26 @@ def build_database_from_csvs():
         "accused": "data/accused.csv",
         "arrest_surrender": "data/arrest_surrender.csv",
         "chargesheet_details": "data/chargesheet_details.csv",
-        "telecom_logs": "data/telecom_logs.csv",  # God's Eye Extension
-        "cctv_metadata": "data/cctv_metadata.csv"
+        "telecom_logs": "data/telecom_logs.csv",
+        "cctv_metadata": "data/cctv_metadata.csv",
+        "financial_transactions": "data/financial_transactions.csv"
     }
 
     print(f"Initializing God's Eye Database: {db_name}...")
 
-    # 3. Loop through the dictionary and load them into SQL
     for table_name, file_path in csv_files.items():
         if os.path.exists(file_path):
             try:
-                # Read the CSV using Pandas
                 df = pd.read_csv(file_path)
-
-                # Push the data to SQLite
-                # if_exists='replace' ensures that running this script multiple times
-                # safely overwrites the old tables with your newest CSV data
                 df.to_sql(table_name, conn, if_exists="replace", index=False)
-
                 print(f" [+] Successfully loaded '{file_path}' into table '{table_name}'. (Rows: {len(df)})")
             except Exception as e:
                 print(f" [!] Error loading {file_path}: {e}")
         else:
             print(f" [!] Warning: Could not find {file_path}. Skipping.")
 
-    # 4. Close the connection
     conn.close()
     print("Database build complete. Ready for Grok integration.")
-
 
 if __name__ == "__main__":
     build_database_from_csvs()
