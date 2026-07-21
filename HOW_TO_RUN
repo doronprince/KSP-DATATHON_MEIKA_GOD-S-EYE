@@ -1,0 +1,73 @@
+# 🚀 How to Run KSP God's Eye
+
+This guide provides step-by-step instructions to initialize the database, start the FastAPI backend, and launch the Next.js frontend.
+
+## 📋 Prerequisites
+*   **Python:** Version 3.10 or higher.
+*   **Node.js:** Version 18 or higher (with `npm`).
+*   **API Key:** An active Gemini API key (Google AI Studio).
+
+## ⚙️ Step 1: Environment Variables
+Create a `.env` file in the root of your **backend** directory and add the following secure credentials:
+
+```env
+GEMINI_API_KEY="your_actual_api_key_here"
+GROK_MODEL="gemini-2.5-flash"
+DB_PATH="intelligence_core.db"
+JWT_SECRET="ksp_datathon_super_secret_key_2026"
+🗄️ Step 2: Database Initialization
+-----------------------------------
+
+Before running the system, you must build the SQLite database and seed it with your KSP Datathon CSV files.
+
+1.  Open your terminal and navigate to the backend directory.
+    
+2.  Ensure your data/ folder contains the required CSV files (e.g., case\_master.csv, employee.csv, telecom\_logs.csv, etc.).
+    
+3.  Bashpip install pandas
+    
+4.  Bashpython csv\_to\_db.py
+    
+5.  Bashpython init\_auth\_db.py
+    
+
+(You should now see an intelligence\_core.db file in your directory).
+
+🔌 Step 3: Start the Backend (FastAPI)
+--------------------------------------
+
+The backend engine handles the AI routing, SQL execution, and WebSockets.
+
+1.  Bashpip install fastapi uvicorn openai python-dotenv pyjwt passlib bcrypt websockets pydantic
+    
+2.  Bashuvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    
+
+(The backend is now actively listening on http://localhost:8000).
+
+🖥️ Step 4: Start the Frontend (Next.js)
+----------------------------------------
+
+The frontend provides the visual HUD and requires specific charting libraries.
+
+1.  Open a new terminal window and navigate to your frontend directory.
+    
+2.  Bashnpm installnpm install d3 recharts jspdf jspdf-autotablenpm install --save-dev @types/d3
+    
+3.  Bashnpm run dev
+    
+
+(Open your browser and navigate to http://localhost:3000).
+
+🛡️ Step 5: Testing Authentication
+----------------------------------
+
+To log in, the system verifies your credentials against the official employee table.
+
+1.  On the login screen, click "First Time Setup? Register Account".
+    
+2.  Enter a valid K.G.I.D that exists in your employee.csv file (e.g., KGID20200911).
+    
+3.  Set a secure password and click "Verify & Register".
+    
+4.  Log in using the K.G.I.D and the password you just created. Your clearance level (Investigator/Analyst/Supervisor) will be automatically assigned based on your official designation.
